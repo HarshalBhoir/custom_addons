@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+
+<record id="view_hr_payslip_form_enhance" model="ir.ui.view">
+    <field name="name">hr.payslip.form</field>
+    <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form" />
+    <field name="model">hr.payslip</field>
+    <field name="arch" type="xml">
+    <xpath expr="//header" position="replace">
+        <header>
+            <div>
+            <button string="Confirm" name="hr_verify_sheet" states="draft" groups="base.group_user" class="oe_highlight"/>
+            <button string="Refund" name="refund_sheet" states="confirm,done" type='object' groups="base.group_user"/>
+            <button string="Set to Draft" name="draft" states="cancel" groups="base.group_user"/>
+            <button string="Compute Sheet" name="compute_sheet" type="object" states="draft" class="oe_highlight" groups="base.group_user"/>
+            <button string="Cancel Payslip" name="cancel_sheet" states="draft,hr_check,confirm,verify" groups="base.group_user"/>
+            <field name="state" widget="statusbar" statusbar_visible="draft,confirm"/>
+            </div>
+        </header>
+    </xpath>
+    </field>
+</record>
+
+<record id="payroll_hr_employee_view_form_enhance" model="ir.ui.view">
+    <field name="name">payroll.hr.employee.view.form</field>
+    <field name="model">hr.employee</field>
+    <field name="inherit_id" ref="hr_payroll.payroll_hr_employee_view_form"/>
+    <field name="arch" type="xml">
+        <button name="%(hr_payroll.act_hr_employee_payslip_list)d" position="replace">
+            <button name="%(hr_payroll.act_hr_employee_payslip_list)d"  
+                class="oe_stat_button" 
+                icon="fa-money" 
+                type="action" 
+                groups="base.group_user">
+                <field name="payslip_count" widget="statinfo" string="Payslips"/>
+            </button>
+        </button>
+    </field>
+</record>
+
+</data>
+</openerp>

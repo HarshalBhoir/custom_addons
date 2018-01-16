@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="ag_crm_backend" name="ag_crm_backend material theme assets" inherit_id="web.assets_backend">
+	<xpath expr="." position="inside">
+		<link rel="stylesheet" type="text/less" href="/ag_crm_backend/static/src/less/variables.less" t-ignore="true"/>
+		<link rel="stylesheet" type="text/less" href="/ag_crm_backend/static/src/less/bootstrap.less" t-ignore="true"/>
+		<link rel="stylesheet" type="text/less" href="/ag_crm_backend/static/src/less/custom.less" t-ignore="true"/>
+	</xpath>
+</template>
+
+<template id="ag_crm_backend_giraffe_logo" inherit_id="web.webclient_bootstrap">
+	<xpath expr="//div[@class='navbar-header']" position="inside">
+		<img src="/ag_crm_backend/static/src/img/AG-Logo-W1.png" style="height:40px !important; padding:2px; margin-left:5px;"/>
+	</xpath>
+</template>
+
+</odoo>

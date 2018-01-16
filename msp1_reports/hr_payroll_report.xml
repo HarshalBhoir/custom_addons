@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        
+        <!-- Payroll Report Enhanced -->
+        <report id="hr_payroll.action_report_payslip" 
+                model="hr.payslip" 
+                string="Payslip" 
+                report_type="qweb-pdf" 
+                name="msp1_reports.report_payslip" 
+                file="msp1_reports.report_payslip"
+                />
+        
+        
+        <report id="l10n_in_hr_payroll.payslip_details_report"
+                model="hr.payslip"
+                string="PaySlip Details"
+                report_type="qweb-pdf"
+                name="msp1_reports.report_payslipdetails"
+                file="msp1_reports.report_payslipdetails"
+                />
+        
+        
+        <!-- EDI related Email Templates menu -->
+        <record model="ir.actions.act_window" id="action_email_templates">
+            <field name="name">Email Templates</field>
+            <field name="res_model">mail.template</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form,tree</field>
+            <field name="view_id" ref="mail.email_template_tree" />
+            <field name="search_view_id" ref="mail.view_email_template_search"/>
+            <field name="context">{'search_default_model_id':'hr.payslip'}</field>
+            <field name="context" eval="{'search_default_model_id': ref('hr_payroll.model_hr_payslip')}"/>
+        </record>
+    
+    <!--</data>
+    
+    <data noupdate="1">-->
+    
+        <!--Email template -->
+        <record id="email_template_payslip" model="mail.template">
+            <field name="name">Payslip - Send by Email</field>
+            <field name="email_from"></field>
+            <field name="subject">${object.name}</field>
+            <field name="email_to"><![CDATA[${object.employee_id.name} <${object.employee_id.work_email}>]]></field>
+            <field name="reply_to"><![CDATA[${user.name} <${user.email}>]]></field>
+            <field name="model_id" ref="hr_payroll.model_hr_payslip"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="report_template" ref="hr_payroll.action_report_payslip"/>
+            <field name="report_name">INV${(object.number or '').replace('/','')}</field>
+            <field name="lang">${object.employee_id.user_id.partner_id.lang}</field>
+            <field name="body_html"><![CDATA[
+<div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+
+    <p>Dear ${object.employee_id.name},</p>
+
+    <p>For any clarification, please write to hr@msp1services.com</p>
+    <br/>
+    
+    <p>With regards</p>
+    <p>Accounts</p>
+    <p>MSP1</p>
+</div>
+            ]]></field>
+        </record>
+
+    </data>
+</openerp>

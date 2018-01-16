@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+
+<!-- <t t-name="ControlPanel">
+	<div class="oe-control-panel">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-6 oe-cp-title">
+					<ol class="oe-view-title breadcrumb">
+					</ol>
+				</div>
+				<div class="oe-cp-search-view col-md-6" />
+			</div>
+			<div class="row">
+				<div class="col-md-6 oe-button-column">
+					<div class="oe-cp-buttons"></div>
+					<div class="oe-cp-sidebar"></div>
+				</div>
+				<div class="col-md-6">
+					<div class="oe-search-options btn-group"/>
+					<div class="oe-right-toolbar">
+						<div class="oe-cp-pager"></div>
+						<div class="oe-cp-switch-buttons btn-group btn-group-sm"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</t> -->
+
+</templates>

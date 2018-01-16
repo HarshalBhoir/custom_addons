@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		
+		<record id="view_calendar_event_form_extension" model="ir.ui.view">
+            <field name="name">calendar.event.form</field>
+            <field name="inherit_id" ref="calendar.view_calendar_event_form" />
+            <field name="model">calendar.event</field>
+            <field name="arch" type="xml">
+
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <field name="stage_id"  clickable="True"/>
+                    </header>
+                </xpath>
+
+                <field name="state" position="after" >
+                    <field name="status" clickable="True"  invisible="0"/>
+                </field>
+                <field name="partner_ids" position="replace"/>
+
+                <field name="start_datetime" position="replace"/>
+
+
+                <xpath expr="/form/sheet/div" position="after" >
+                    <group >
+                    <field name="start_datetime" string="Starting at" attrs="{'invisible': [('allday','=',True)], 'readonly': [('id', '!=', False), ('recurrency','=',True)]}" class="oe_inline" colspan="1"/>
+                    </group>
+                    <group>
+                        <button string="Check In" name="checkin"  type="object" attrs="{'invisible': [('status', '!=', 'draft')]}"/>
+                        <button string="Check Out" name="checkout" type="object" attrs="{'invisible': [('status', '!=', 'open')]}"/>
+                    </group>
+                    <group  class="oe_title">
+                    <field name="ischeck" />
+                    <field name="lead_id" attrs="{'invisible': [('ischeck','!=','lead'),('ischeck', '!=','opportunity')]}"/>
+                    <field name="partner_ids" widget="many2manyattendee" placeholder="Select attendees..."
+                            context="{'force_email':True}"
+                            class="oe_inline" attrs="{'invisible': [('ischeck', '!=','customer')]}"/>
+                        </group>
+                        <group col="4">
+                            <field name="source" colspan="2"/>
+                            <field name="destination" colspan="2"/>
+                            <button string="Distance" name="get_coordinates"  type="object" />
+                        </group>
+
+                </xpath>
+              
+                 <xpath expr="//label[@for='partner_ids']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                  <xpath expr="//label[@for='duration']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+
+                <xpath expr="//notebook/page[1]/group[2]/group[1]/div" position="attributes">
+                     <attribute name ="invisible">1</attribute>
+                </xpath>
+
+               <field name="location" position='replace' >
+                    <label for="meeting_duration" attrs="{'invisible': [('allday','=',True)]}"/>
+                     <div attrs="{'invisible': [('allday','=',True)]}">
+                        <field name="meeting_duration"  string="Duration" class="oe_inline" />
+                        <span> hours</span>
+                    </div>
+                </field>
+
+                
+
+                <xpath expr="//page[3]" position="before">
+                   <page name="logging_detail" string="Logging Details" >
+                        <group>
+                            <group>
+                            <field name="checkin_lattitude"  readonly="0" />
+                            <field name="checkin_longitude"  readonly="0"  />
+                            <field name="timein"  readonly="0"  />
+                        </group>
+                         <group>
+                            <field name="checkout_lattitude"  readonly="0" />
+                            <field name="checkout_longitude"  readonly="0"  />
+                            <field name="timeout"  readonly="0"  />
+                            <field name="distance" />
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
+
+            </field>
+        </record>
+
+
+        <!-- Main Menu -->
+<menuitem name="Meetings" id="sales_meet_main_menu" sequence="2"/>
+
+<!-- Configuration Sub Menu -->
+<menuitem name="Meetings" id="sales_meet_submenu" parent="sales_meet_main_menu"/>
+
+<menuitem name="Meetings" id="sales_meet_submenu" parent="sales_meet_main_menu"/>
+
+<menuitem name="Meetings" id="Meetings_menu" action="calendar.action_calendar_event"
+          parent="sales_meet_submenu" sequence="1" />
+
+
+	</data>
+</openerp>
+        
+        
