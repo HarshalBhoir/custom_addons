@@ -8,19 +8,22 @@
             <field name="model">calendar.event</field>
             <field name="arch" type="xml">
 
-                <xpath expr="//sheet" position="before">
+                <!-- <xpath expr="//sheet" position="before">
                     <header>
-                        <field name="stage_id"  clickable="True"/>
+                        <field name="stage_id"  widget="selection"/>
                     </header>
-                </xpath>
+                </xpath> -->
 
                 <field name="state" position="after" >
-                    <field name="status" clickable="True"  invisible="0"/>
+                    <group col="4">
+                        <field name="stage_id"  widget="selection" colspan="2"/>
+                        <field name="status" clickable="True"  invisible="1"  colspan="2"/>
+                    </group>
                 </field>
+
                 <field name="partner_ids" position="replace"/>
 
                 <field name="start_datetime" position="replace"/>
-
 
                 <xpath expr="/form/sheet/div" position="after" >
                     <group >
@@ -31,18 +34,18 @@
                         <button string="Check Out" name="checkout" type="object" attrs="{'invisible': [('status', '!=', 'open')]}"/>
                     </group>
                     <group  class="oe_title">
-                    <field name="ischeck" />
-                    <field name="lead_id" attrs="{'invisible': [('ischeck','!=','lead'),('ischeck', '!=','opportunity')]}"/>
+                    <field name="ischeck" required="1"/>
+                    <field name="lead_id" attrs="{'invisible': [('ischeck','!=','lead'),('ischeck', '!=','opportunity')],'required': [('ischeck','=','lead')]}"/>
                     <field name="partner_ids" widget="many2manyattendee" placeholder="Select attendees..."
                             context="{'force_email':True}"
-                            class="oe_inline" attrs="{'invisible': [('ischeck', '!=','customer')]}"/>
-                        </group>
-                        <group col="4">
-                            <field name="source" colspan="2"/>
-                            <field name="destination" colspan="2"/>
-                            <button string="Distance" name="get_coordinates"  type="object" />
-                        </group>
-
+                            class="oe_inline" attrs="{'invisible': [('ischeck', '!=','customer')],'required': [('ischeck','=','customer')]}"/>
+                    </group>
+                    <group col="4">
+                        <field name="source" colspan="2" widget="gsource_autocomplete"/>
+                        <field name="destination" colspan="2" widget="gdest_autocomplete"/>
+                        <button string="Distance" name="get_coordinates"  type="object" />
+                    </group>
+                                               
                 </xpath>
               
                  <xpath expr="//label[@for='partner_ids']" position="attributes">
@@ -64,9 +67,15 @@
                         <field name="meeting_duration"  string="Duration" class="oe_inline" />
                         <span> hours</span>
                     </div>
+
                 </field>
 
-                
+                <field name="allday" position="after" >
+                    <group col="4">
+                        <field name="source_address"/>
+                        <field name="destination_address"/>
+                    </group>
+                </field>
 
                 <xpath expr="//page[3]" position="before">
                    <page name="logging_detail" string="Logging Details" >
@@ -74,11 +83,15 @@
                             <group>
                             <field name="checkin_lattitude"  readonly="0" />
                             <field name="checkin_longitude"  readonly="0"  />
+                            <field name="partner_latitude"/>
+                            <field name="partner_longitude"/>
                             <field name="timein"  readonly="0"  />
                         </group>
                          <group>
                             <field name="checkout_lattitude"  readonly="0" />
                             <field name="checkout_longitude"  readonly="0"  />
+                            <field name="partner_dest_latitude"/>
+                            <field name="partner_dest_longitude"/>
                             <field name="timeout"  readonly="0"  />
                             <field name="distance" />
                             </group>
@@ -91,17 +104,56 @@
         </record>
 
 
-        <!-- Main Menu -->
-<menuitem name="Meetings" id="sales_meet_main_menu" sequence="2"/>
+        <!-- <record id="view_calendar_event_tree_extension" model="ir.ui.view">
+        <field name="name">calendar.event.tree</field>
+        <field name="model">calendar.event</field>
+        <field name="arch" type="xml">
+            <tree string="Meetings" decoration-bf="message_needaction==True">
+                <field name="name" string="Subject"/>
+                <field name="allday" invisible="True"/>
+                <field name="start" string="Start Date"/>
+                <field name="stop" string="End Date"/>
+                <field name="partner_ids"/>
+                <field name="location"/>
+                <field name="state" invisible="True"/>
+                <field name="duration"/>
+                <field name="message_needaction" invisible="1"/>
+            </tree>
+        </field>
+    </record> -->
 
-<!-- Configuration Sub Menu -->
-<menuitem name="Meetings" id="sales_meet_submenu" parent="sales_meet_main_menu"/>
 
-<menuitem name="Meetings" id="sales_meet_submenu" parent="sales_meet_main_menu"/>
+    <record id="action_calendar_event_crm" model="ir.actions.act_window">
+        <field name="name">Meetings</field>
+        <field name="res_model">calendar.event</field>
+        <field name="view_mode">tree,calendar,form</field>
+        <field name="inherit_id" ref="calendar.action_calendar_event" />
+        <field name="view_id" ref="calendar.view_calendar_event_tree"/>
+        <field name="search_view_id" ref="calendar.view_calendar_event_search"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to schedule a new meeting.
+          </p><p>
+            The calendar is shared between employees and fully integrated with
+            other applications such as the employee holidays or the business
+            opportunities.
+          </p>
+        </field>
+    </record>
 
-<menuitem name="Meetings" id="Meetings_menu" action="calendar.action_calendar_event"
-          parent="sales_meet_submenu" sequence="1" />
 
+<menuitem name="CRM" id="sales_meet_main_menu" sequence="2" web_icon="sales_meet,static/description/icon.png"/>
+
+<menuitem name="Meetings" id="Meetings_menu" action="action_calendar_event_crm"
+          parent="sales_meet_main_menu" sequence="1" groups="group_sales_meet_executive"/>
+
+<menuitem name="Leads" id="leads_menu" action="crm.crm_lead_all_leads"
+          parent="sales_meet_main_menu" sequence="2" />
+
+<menuitem name="Opportunity" id="opportunities_menu" action="crm.crm_lead_opportunities_tree_view"
+          parent="sales_meet_main_menu" sequence="3" />
+
+            
 
 	</data>
 </openerp>

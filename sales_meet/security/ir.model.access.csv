@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_calendar_event_executive,sales_meet.crm_sale_order manager,sale.model_sale_order,pro_crm.group_pro_crm_zsm,1,1,1,1

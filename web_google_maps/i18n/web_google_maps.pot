@@ -132,6 +132,13 @@ msgstr ""
 
 #. module: web_google_maps
 #. openerp-web
+#: code:addons/web_google_maps/static/src/js/widget/google_sources_autocomplete_widget.js:14
+#, python-format
+msgid "Google Sources"
+msgstr ""
+
+#. module: web_google_maps
+#. openerp-web
 #: code:addons/web_google_maps/static/src/js/widget/google_places_widget.js:14
 #, python-format
 msgid "Google Places Form Address"
@@ -259,6 +266,8 @@ msgstr ""
 #, python-format
 msgid "The following fields are invalid:"
 msgstr ""
+
+
 
 #. module: web_google_maps
 #: model:ir.ui.view,arch_db:web_google_maps.view_website_config_settings_inherit

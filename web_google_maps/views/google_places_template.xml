@@ -29,6 +29,8 @@
                 <script type="text/javascript" src="/web_google_maps/static/src/js/view/map_view.js"/>
                 <script type="text/javascript" src="/web_google_maps/static/src/js/widget/google_places_widget.js"/>
                 <script type="text/javascript" src="/web_google_maps/static/src/js/widget/google_places_autocomplete_widget.js"/>
+                <script type="text/javascript" src="/web_google_maps/static/src/js/widget/google_source_autocomplete_widget.js"/>
+                <script type="text/javascript" src="/web_google_maps/static/src/js/widget/google_destination_autocomplete_widget.js"/>
             </xpath>
         </template>
     </data>

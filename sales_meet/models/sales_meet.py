@@ -90,7 +90,23 @@ class sales_meet(models.Model):
      default=lambda self: self._default_stage_id())
     meeting_duration = fields.Char('Meeting Duration')
     source = fields.Char('Source Address')
+    source_address = fields.Char('Source Address')
     destination = fields.Char('Destination Address')
+    destination_address = fields.Char('Destination Address')
+    # phone = fields.Char('Phone')
+    # website = fields.Char('Website')
+    partner_latitude = fields.Float(string='Source Geo Latitude', digits=(16, 5))
+    partner_longitude = fields.Float(string='Source Geo Longitude', digits=(16, 5))
+    partner_dest_latitude = fields.Float(string='Dest Geo Latitude', digits=(16, 5))
+    partner_dest_longitude = fields.Float(string='Dest Geo Longitude', digits=(16, 5))
+    date_localization = fields.Date(string='Geolocation Date')
+    # street = fields.Char('Street')
+    # street2 = fields.Char('Street2')
+    # zip = fields.Char('Zip', change_default=True)
+    # city = fields.Char('City')
+    # state_id = fields.Many2one("res.country.state", string='State')
+    # country_id = fields.Many2one('res.country', string='Country')
+
     # start = fields.Datetime('Start', help="Start date of an event, without time for full days events")
     # stop = fields.Datetime('Stop', help="Stop date of an event, without time for full days events")
     # start_datetime = fields.Datetime('Start DateTime', compute=False, inverse=False, store=True, states={'done': [('readonly', True)]}, track_visibility='onchange')
@@ -131,7 +147,6 @@ class sales_meet(models.Model):
         h = geocoder.ip('ip')
         g = geocoder.ip('me')
         latlong.append(g.latlng)
-        print "KKKKKKKKKKKKKKKKKKK" , g , h
         self.checkin_lattitude = g.latlng[0]
         self.checkin_longitude = g.latlng[1]
         self.timein = strftime("%Y-%m-%d %H:%M:%S", gmtime())
@@ -140,7 +155,6 @@ class sales_meet(models.Model):
 
     @api.one
     def get_coordinates(self, from_sensor=False):
-        print "JJJJJJJJDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD"
         query = self.source
         query = query.encode('utf-8')
         params = {
@@ -153,31 +167,52 @@ class sales_meet(models.Model):
         if response['results']:
             location = response['results'][0]['geometry']['location']
             latitude, longitude = location['lat'], location['lng']
-            print query, latitude, longitude
         else:
             latitude, longitude = None, None
             print query, "<no results>"
 
+        query2 = self.destination
+        query2 = query2.encode('utf-8')
+        params2 = {
+            'address': query2,
+            'sensor': "true" if from_sensor else "false"
+        }
+        url2 = googleGeocodeUrl + urllib.urlencode(params2)
+        json_response2 = urllib.urlopen(url2)
+        response2 = simplejson.loads(json_response2.read())
+        if response2['results']:
+            location2 = response2['results'][0]['geometry']['location']
+            latitude2, longitude2 = location2['lat'], location2['lng']
+        else:
+            latitude2, longitude2 = None, None
+            print query2, "<no results>"
 
-        print "AAAAAAAAAAAAAAAAAAAAAAAAAAA" , latitude , longitude
 
-        self.checkout_lattitude = latitude
-        self.checkout_longitude = longitude
+        self.checkin_lattitude = latitude
+        self.checkin_longitude = longitude
+
+        self.checkout_lattitude = latitude2
+        self.checkout_longitude = longitude2
 
         # self.description = str(latitude) + " ," + str(longitude)
         # return latitude, longitude
 
+        source_latlong= '"' + str(latitude) + ',' + str(longitude) + '"'
+        destination_latlong= '"' + str(latitude2) + ',' + str(longitude2) + '"'
 
         now = datetime.now()
-        directions_result = gmaps.directions(latitude,
-                                             longitude,
+        directions_result = gmaps.directions(source_latlong,
+                                             destination_latlong,
                                              mode="driving",
                                              avoid="ferries",
                                              departure_time=now
                                             )
 
-        print(directions_result[0]['legs'][0]['distance']['text'])
-        print(directions_result[0]['legs'][0]['duration']['text'])
+
+        self.distance =  directions_result[0]['legs'][0]['distance']['text']
+
+        print directions_result[0]['legs'][0]['distance']['text']
+        print  directions_result[0]['legs'][0]['duration']['text']  , type(directions_result[0]['legs'][0]['duration']['text'])
 
 
 

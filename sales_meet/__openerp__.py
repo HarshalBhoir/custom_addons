@@ -25,16 +25,19 @@
     'sequence': 1,
     'description': """
     Task on Lead, Add Task from lead, Task Lead, Create Project Task from Lead, 
-    Add task from mail, Create task from mail.Task on lead, add task on lead, tasks on lead, lead tasks, automated task by lead, 
+    Add task from mail, Create task from mail.Task on lead, add task on lead, tasks on lead,
+     lead tasks, automated task by lead, 
     Generate task from lead.
 """,
     'author': 'Harshal Bhoir (Walplast)',
     'website': 'https://harshalbhoir.github.io/',
     'images': [],
-    'depends': ['base', 'crm', 'sale', 'project'],
+    'depends': ['base', 'crm', 'sale', 'project', 'web_google_maps'],
     
     'data': [ 
-             'views/sales_meet_view.xml'
+            'security/sales_meet_security.xml',
+            'views/sales_meet_view.xml',
+             
     ],
     'installable': True,
     'auto_install': False,
