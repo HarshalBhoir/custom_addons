@@ -45,6 +45,7 @@ datetimeFormat = '%Y-%m-%d %H:%M:%S'
 class sales_meet(models.Model):
     _inherit = "calendar.event"
 
+
     # @api.model
     # def create(self, vals):
     #     result = super(sales_meet, self).create(vals)
@@ -141,7 +142,7 @@ class sales_meet(models.Model):
     #         self.start = self.start_datetime
     #         self.stop = fields.Datetime.to_string(start + timedelta(hours=self.duration))
 
-    @api.one
+    @api.multi
     def checkin(self):
         latlong = []
         h = geocoder.ip('ip')
@@ -152,6 +153,17 @@ class sales_meet(models.Model):
         self.timein = strftime("%Y-%m-%d %H:%M:%S", gmtime())
         self.status = 'open'
         # self.start_datetime = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+
+
+
+
+        # res = []
+        # res =  request.env['calendar.event'].search([])
+
+        # return res
+
+
+
 
     @api.one
     def get_coordinates(self, from_sensor=False):

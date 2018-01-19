@@ -8,6 +8,7 @@
             <field name="model">calendar.event</field>
             <field name="arch" type="xml">
 
+
                 <!-- <xpath expr="//sheet" position="before">
                     <header>
                         <field name="stage_id"  widget="selection"/>
@@ -35,7 +36,7 @@
                     </group>
                     <group  class="oe_title">
                     <field name="ischeck" required="1"/>
-                    <field name="lead_id" attrs="{'invisible': [('ischeck','!=','lead'),('ischeck', '!=','opportunity')],'required': [('ischeck','=','lead')]}"/>
+                    <field name="lead_id" attrs="{'invisible': [('ischeck','!=','lead'),('ischeck', '!=','opportunity')],'required': [('ischeck','=','lead')]}" widget="selection" />
                     <field name="partner_ids" widget="many2manyattendee" placeholder="Select attendees..."
                             context="{'force_email':True}"
                             class="oe_inline" attrs="{'invisible': [('ischeck', '!=','customer')],'required': [('ischeck','=','customer')]}"/>
@@ -81,8 +82,8 @@
                    <page name="logging_detail" string="Logging Details" >
                         <group>
                             <group>
-                            <field name="checkin_lattitude"  readonly="0" />
-                            <field name="checkin_longitude"  readonly="0"  />
+                            <field name="checkin_lattitude" id="checkin_lattitude" readonly="0" />
+                            <field name="checkin_longitude" id="checkin_longitude" readonly="0"  />
                             <field name="partner_latitude"/>
                             <field name="partner_longitude"/>
                             <field name="timein"  readonly="0"  />
@@ -145,7 +146,7 @@
 <menuitem name="CRM" id="sales_meet_main_menu" sequence="2" web_icon="sales_meet,static/description/icon.png"/>
 
 <menuitem name="Meetings" id="Meetings_menu" action="action_calendar_event_crm"
-          parent="sales_meet_main_menu" sequence="1" groups="group_sales_meet_executive"/>
+          parent="sales_meet_main_menu" sequence="1" />
 
 <menuitem name="Leads" id="leads_menu" action="crm.crm_lead_all_leads"
           parent="sales_meet_main_menu" sequence="2" />

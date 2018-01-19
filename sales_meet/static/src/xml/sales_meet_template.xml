@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <template id="assets_backend" name="sales_meet assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+        <!--These links will be called when loading your Odoo -->
+                <script type="text/javascript" src="/sales_meet/static/src/js/geolocation.js"></script>
+            </xpath>
+        </template>
+		
+    </data>
+</openerp>

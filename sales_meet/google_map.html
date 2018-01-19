@@ -10,7 +10,13 @@
         <script>
 
             function initMap() {
+
+                console.log('AAAAAAAAAAAAAA');
+
                 var querystring = window.location.querystring;
+                console.log('BBBBBBBBBBBBBBBB' + querystring)
+
+
 
                 var mylong = location.search.slice(11,location.search.indexOf("&"));
                 var mylati = location.search.slice(location.search.indexOf("latitude=")+9,location.search.indexOf("&key"))
@@ -30,6 +36,8 @@
     <body>
         <div id="map">
         </div>
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWGBUR56Byqip7RUel5-EeWzFQygna2Hg&callback=initMap"> </script>
+           <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWGBUR56Byqip7RUel5-EeWzFQygna2Hg&callback=initMap">
+    </script>
     </body>
 </html>

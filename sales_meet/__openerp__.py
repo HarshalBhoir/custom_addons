@@ -36,7 +36,9 @@
     
     'data': [ 
             'security/sales_meet_security.xml',
+            'static/src/xml/sales_meet_template.xml',
             'views/sales_meet_view.xml',
+
              
     ],
     'installable': True,
