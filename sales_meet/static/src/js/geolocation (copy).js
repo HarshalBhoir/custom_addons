@@ -37,7 +37,7 @@ function success(pos) {
 
 
    // self.view.fields.checkin_lattitude.set_value(checkin_lattitude);
-    this.field_manager.get_field_value('checkin_lattitude');
+    // this.field_manager.get_field_value('checkin_lattitude');
 
 
 };

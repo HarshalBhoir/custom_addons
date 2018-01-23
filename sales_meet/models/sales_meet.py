@@ -54,24 +54,24 @@ class sales_meet(models.Model):
 
     #     return result
 
-    @api.model
-    def default_get(self, fields_list):
-        res = super(sales_meet, self).default_get(fields_list)
+    # @api.model
+    # def default_get(self, fields_list):
+    #     res = super(sales_meet, self).default_get(fields_list)
 
-        # res['start_datetime'] = strftime("%Y-%m-%d %H:%M:%S", gmtime())
-        meetings = self.env['calendar.event'].search([])
-        for record in meetings:
-            if record.status != 'close' and record.user_id.id == self.env.uid :
-                raise ValidationError('Kindly Checkout from previous Meeting - %s' % (record.name))
-        return res
+    #     # res['start_datetime'] = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+    #     meetings = self.env['calendar.event'].search([])
+    #     for record in meetings:
+    #         if record.status != 'close' and record.user_id.id == self.env.uid :
+    #             raise ValidationError('Kindly Checkout from previous Meeting - %s' % (record.name))
+    #     return res
 
 
     def _default_stage_id(self):
         stage = self.env['crm.stage'].search([('name','=','New')])
         return stage.id
 
-    checkin_lattitude = fields.Char('Checkin Latitude')
-    checkin_longitude = fields.Char('Checkin Longitude')
+    checkin_lattitude = fields.Char('Checkin Latitude') # LEENA HYA FIELD MADHYE LATTITUDE 
+    checkin_longitude = fields.Char('Checkin Longitude') # LEENA HYA FIELD MADHYE lONGITUDE 
     checkout_lattitude = fields.Char('Checkout Latitude')
     checkout_longitude = fields.Char('Checkout Longitude')
     distance = fields.Char('Distance')
@@ -113,56 +113,18 @@ class sales_meet(models.Model):
     # start_datetime = fields.Datetime('Start DateTime', compute=False, inverse=False, store=True, states={'done': [('readonly', True)]}, track_visibility='onchange')
 
 
-    # @api.onchange('name')
-    # def _onchange_name(self):
-    #     """ Make entry on email and availability on change of partner_id field. """
-    #     print "LLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOOOOOOOOOOO"
-    #     self.start_datetime = strftime("%Y-%m-%d %H:%M:%S", gmtime())
-
-
-    # @api.multi
-    # @api.depends('allday', 'start_date')
-    # def _compute_display_start(self):
-    #     for meeting in self:
-    #         meeting.display_start = meeting.start_date if meeting.allday else meeting.start_datetime
-
-
-    # @api.constrains('stop_datetime', 'start_date', 'stop_date')
-    # def _check_closing_date(self):
-    #     for meeting in self:
-    #         if meeting.start_datetime and meeting.stop_datetime and meeting.stop_datetime < meeting.start_datetime:
-    #             raise ValidationError(_('Ending datetime cannot be set before starting datetime.'))
-    #         if meeting.start_date and meeting.stop_date and meeting.stop_date < meeting.start_date:
-    #             raise ValidationError(_('Ending date cannot be set before starting date.'))
-
-    # @api.onchange('duration')
-    # def _onchange_duration(self):
-    #     if self.start_datetime:
-    #         start = fields.Datetime.from_string(self.start_datetime)
-    #         self.start = self.start_datetime
-    #         self.stop = fields.Datetime.to_string(start + timedelta(hours=self.duration))
 
     @api.multi
     def checkin(self):
-        latlong = []
-        h = geocoder.ip('ip')
-        g = geocoder.ip('me')
-        latlong.append(g.latlng)
-        self.checkin_lattitude = g.latlng[0]
-        self.checkin_longitude = g.latlng[1]
+        # latlong = []
+        # h = geocoder.ip('ip')
+        # g = geocoder.ip('me')
+        # latlong.append(g.latlng)
+        # self.checkin_lattitude = g.latlng[0]
+        # self.checkin_longitude = g.latlng[1]
         self.timein = strftime("%Y-%m-%d %H:%M:%S", gmtime())
         self.status = 'open'
         # self.start_datetime = strftime("%Y-%m-%d %H:%M:%S", gmtime())
-
-
-
-
-        # res = []
-        # res =  request.env['calendar.event'].search([])
-
-        # return res
-
-
 
 
     @api.one

@@ -31,7 +31,7 @@
                     <field name="start_datetime" string="Starting at" attrs="{'invisible': [('allday','=',True)], 'readonly': [('id', '!=', False), ('recurrency','=',True)]}" class="oe_inline" colspan="1"/>
                     </group>
                     <group>
-                        <button string="Check In" name="checkin"  type="object" attrs="{'invisible': [('status', '!=', 'draft')]}"/>
+                        <button string="Check In" name="checkin" class="geo_checkin" type="object" attrs="{'invisible': [('status', '!=', 'draft')]}"/>
                         <button string="Check Out" name="checkout" type="object" attrs="{'invisible': [('status', '!=', 'open')]}"/>
                     </group>
                     <group  class="oe_title">
@@ -82,8 +82,8 @@
                    <page name="logging_detail" string="Logging Details" >
                         <group>
                             <group>
-                            <field name="checkin_lattitude" id="checkin_lattitude" readonly="0" />
-                            <field name="checkin_longitude" id="checkin_longitude" readonly="0"  />
+                            <field name="checkin_lattitude" id="checkin_lattitude" class="checkin_lattitude"/>
+                            <field name="checkin_longitude" id="checkin_longitude" class="checkin_longitude"/>
                             <field name="partner_latitude"/>
                             <field name="partner_longitude"/>
                             <field name="timein"  readonly="0"  />
