@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_users_form_extension" model="ir.ui.view">
+            <field name="name">res.users.form</field>
+            <field name="inherit_id" ref="base.view_users_form" />
+            <field name="model">res.users</field>
+            <field name="arch" type="xml">
+                    <page name="access_rights" position="after">
+                        <page string="Restricted access" > 
+                            <!-- attrs="{'invisible': [('is_external_user', '=', False)]}" -->
+                            <field name="is_external_user" invisible="0" />
+                            <field name="external_user_partner_ids" colspan="4" />
+                        </page>
+                    </page>
+            </field>
+        </record>
+
+    </data>
+</openerp>

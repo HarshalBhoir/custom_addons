@@ -32,12 +32,23 @@
     'author': 'Harshal Bhoir (Walplast)',
     'website': 'https://harshalbhoir.github.io/',
     'images': [],
-    'depends': ['base', 'crm', 'sale', 'project', 'web_google_maps'],
+    'depends': ['base', 'calendar', 'crm', 'sale', 'project','hr','purchase','hr_expense','website',
+                'hr_timesheet','hr_holidays','stock','sales_team','account','hr_payroll','hr_attendance'],
     
     'data': [ 
             'security/sales_meet_security.xml',
+            'security/ir.model.access.csv',
             'static/src/xml/sales_meet_template.xml',
+            # 'report/meetings_details_reports_view.xml',
+            'views/expense_extension_view.xml',
+            'views/grade_master_view.xml',
+            'report/meeting_report_xls_view.xml',
+            'data/scheduler_data.xml',
             'views/sales_meet_view.xml',
+            'views/partner_extension_view.xml',
+            'views/hr_extension_view.xml',
+            'views/crm_extension_view.xml',
+            'views/sales_meet_menus.xml',
 
              
     ],
@@ -47,3 +58,5 @@
 }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+
+# https://stackoverflow.com/questions/39223570/how-to-set-a-field-editable-only-for-a-group-in-odoo9

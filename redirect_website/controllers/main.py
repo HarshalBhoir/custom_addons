@@ -16,6 +16,18 @@ class WebsiteRedirect(odoo.addons.web.controllers.main.Home):
 		if request.session.get('login') in [None,False]:
 			return http.local_redirect('/web', query=request.params, keep_hash=True)
 		else:
-			return http.local_redirect('/page/homepage', query=request.params, keep_hash=True)
+			return http.local_redirect('/web', query=request.params, keep_hash=True)
+
+
+
+
+	@http.route('/*', type='http', auth="public", website=True)
+	def index2(self, s_action=None, db=None, **kw):
+		logger.info("Redirected to Portal")
+		if request.session.get('login') in [None,False]:
+			return http.local_redirect('/web', query=request.params, keep_hash=True)
+		else:
+			return http.local_redirect('/web', query=request.params, keep_hash=True)
 
 website.index = WebsiteRedirect.index
+website.index = WebsiteRedirect.index2

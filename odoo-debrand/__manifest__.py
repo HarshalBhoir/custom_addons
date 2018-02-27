@@ -29,7 +29,7 @@
     'company': "Cybrosys Techno Solutions",
     'website': "https://cybrosys.com/",
     'category': 'Tools',
-    'depends': ['base', 'im_livechat', 'website'],
+    'depends': ['base', 'website'],
     'data': [
         'views/views.xml'],
     'demo': [],

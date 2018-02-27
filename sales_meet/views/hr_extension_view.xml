@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		
+		<record id="view_employee_form_extension" model="ir.ui.view">
+            <field name="name">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form" />
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+
+		      <field name="category_ids" position="after"  >
+                <group>
+                       <field name="grade_id"/>
+                       <field name="emp_id"/>
+                       <field name="c_bpartner_id"/>
+                       <field name="status"/>
+                </group>
+                </field>
+
+          <field name="calendar_id" position="after"  >
+                 <field name="roll" invisible="0"/>
+                 <field name="zone" invisible="0"/>
+          </field>
+
+          <field name="work_phone" position="after"  >
+                 <field name="category_ids" invisible="0"/>
+                 <field name="category_id" invisible="0"/>
+          </field>
+
+          <field name="address_home_id" position="after"  >
+                 <field name="roll" invisible="0"/>
+                 <field name="date_of_joining" invisible="0"/>
+                 <field name="date_of_resignation" invisible="0"/>
+                 <field name="last_date" invisible="0"/>
+                 <field name="fnf" invisible="0"/>
+          </field>
+
+            </field>
+        </record>
+
+
+    <record id="view_hr_payslip_form_extension" model="ir.ui.view">
+            <field name="name">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form" />
+            <field name="model">hr.payslip</field>
+            <field name="arch" type="xml">
+
+          <field name="credit_note" position="after"  >
+                 <field name="unpaid_id" invisible="1"/>
+                 <field name="month_days" invisible="1"/>
+          </field>
+
+          <!-- <field name="salary_rule_id" position="after"  >
+                 <field name="theoretical_amount" invisible="0"/>
+          </field> -->
+          
+
+        </field>
+    </record>
+
+    <!-- <record id="hr_salary_rule_form_extension" model="ir.ui.view">
+        <field name="name">hr.salary.rule</field>
+        <field name="inherit_id" ref="hr_payroll.hr_salary_rule_form" />
+        <field name="model">hr.salary.rule</field>
+        <field name="arch" type="xml">
+
+          <field name="amount_python_compute" position="after"  >
+                 <field name="theoretical_python_compute" invisible="0"/>
+          </field>
+
+        </field>
+    </record> -->
+
+    <record id="view_hr_employee_category_form" model="ir.ui.view">
+        <field name="name">hr.employee.category</field>
+        <field name="model">hr.employee.category</field>
+        <field name="arch" type="xml">
+            <form>
+              <group>
+                <field name="name" required="1"/>
+                <field name="category_id" required="1"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_hr_employee_category" model="ir.actions.act_window">
+        <field name="name">Employee Category</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.employee.category</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+	</data>
+</openerp>
+        
+        

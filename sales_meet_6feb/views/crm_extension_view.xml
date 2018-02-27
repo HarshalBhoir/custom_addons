@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		
+		<record id="crm_case_form_view_leads_extension" model="ir.ui.view">
+            <field name="name">crm.lead.form</field>
+            <field name="inherit_id" ref="crm.crm_case_form_view_leads" />
+            <field name="model">crm.lead</field>
+            <field name="arch" type="xml">
+
+		            <field name="team_id" position="after"  >
+                       <field name="pan_no"/>
+                       <field name="gst_no"/>
+                </field>
+
+                <field name="partner_name" position="after"  >
+                       <field name="partner_group_id"  options="{'no_create': True, 'no_edit': True}"/>
+                </field>
+
+                <field name="title" position='attributes' >
+                    <attribute name ="invisible">1</attribute>
+                </field>
+
+                <field name="fax" position='attributes' >
+                    <attribute name ="invisible">1</attribute>
+                </field>
+
+                <field name="priority" position='attributes' >
+                    <attribute name ="invisible">1</attribute>
+                </field>
+
+                <field name="tag_ids" position='attributes' >
+                    <attribute name ="invisible">1</attribute>
+                </field>
+
+                <field name="team_id" position='attributes' >
+                    <attribute name ="invisible">1</attribute>
+                </field>
+
+                <field name="tag_ids" position="after"  >
+                       <field name="tin_no"/>
+                       <field name="credit_limit"/>
+                </field>
+
+                <xpath expr="/form/header/button" position="attributes">
+                     <attribute name ="groups">sales_meet.group_sales_meet_saleshead,sales_meet.group_sales_meet_zsm,sales_meet.group_sales_meet_srmanager,sales_meet.group_sales_meet_manager,sales_meet.group_sales_meet_asstmanager,sales_meet.group_sales_meet_srexecutive</attribute>
+                </xpath>
+
+                <xpath expr="/form/sheet/div[1]" position="attributes">
+                     <attribute name ="groups">sales_meet.group_sales_meet_saleshead,sales_meet.group_sales_meet_zsm,sales_meet.group_sales_meet_srmanager,sales_meet.group_sales_meet_manager,sales_meet.group_sales_meet_asstmanager,sales_meet.group_sales_meet_srexecutive</attribute>
+                </xpath>
+
+
+                <page name="extra" position='attributes' >
+                    <attribute name ="groups">sales_meet.group_sales_meet_saleshead,sales_meet.group_sales_meet_zsm,sales_meet.group_sales_meet_srmanager,sales_meet.group_sales_meet_manager,sales_meet.group_sales_meet_asstmanager,sales_meet.group_sales_meet_srexecutive</attribute>
+                </page>
+
+            </field>
+        </record>
+
+
+	</data>
+</openerp>
+        
+        

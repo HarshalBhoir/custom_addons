@@ -97,16 +97,16 @@ odoo.define('web_responsive', function(require) {
             this.$el = $('.drawer');
             this.$el.drawer();
             this.$el.one('drawer.opened', $.proxy(this.onDrawerOpen, this));
-            this.$el.on('drawer.opened', function setIScrollProbes(){
-                var onIScroll = function() {
-                    var transform = (this.iScroll.y) ? this.iScroll.y * -1 : 0;
-                    $(this).find('#appDrawerAppPanelHead').css(
-                        'transform', 'matrix(1, 0, 0, 1, 0, ' + transform + ')'
-                    );
-                };
-                this.iScroll.options.probeType = 2;
-                this.iScroll.on('scroll', $.proxy(onIScroll, this));
-            });
+            // this.$el.on('drawer.opened', function setIScrollProbes(){
+            //     var onIScroll = function() {
+            //         var transform = (this.iScroll.y) ? this.iScroll.y * -1 : 0;
+            //         $(this).find('#appDrawerAppPanelHead').css(
+            //             'transform', 'matrix(1, 0, 0, 1, 0, ' + transform + ')'
+            //         );
+            //     };
+            //     this.iScroll.options.probeType = 2;
+            //     this.iScroll.on('scroll', $.proxy(onIScroll, this));
+            // });
             this.initialized = true;
         },
 

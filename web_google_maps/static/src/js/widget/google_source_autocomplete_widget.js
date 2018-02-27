@@ -6,6 +6,7 @@ odoo.define('web_google_maps.GoogleSourceAutocomplete', function (require) {
     var ajax = require('web.ajax');
     var MapViewSourceAutocomplete = require('web.MapViewPlacesAutocomplete');
     var _t = core._t;
+    var source_autocomplete;
 
 
     var FieldCharGoogleSourceAutocomplete = form_widgets.FieldChar.extend({

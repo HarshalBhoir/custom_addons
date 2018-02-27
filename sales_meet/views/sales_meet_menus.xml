@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+	
+	
+<menuitem name="Meetings" id="sales_meet_main_menu" sequence="2" web_icon="sales_meet,static/description/meeting_icon.png" />
+
+<menuitem name="Meetings" id="Meetings_menu" action="action_calendar_event_crm"
+          parent="sales_meet_main_menu" sequence="1" groups="sales_meet.group_sales_meet_executive,sales_meet.group_sales_meet_saleshead,sales_meet.group_sales_meet_zsm,sales_meet.group_sales_meet_srmanager,sales_meet.group_sales_meet_manager,sales_meet.group_sales_meet_asstmanager,sales_meet.group_sales_meet_srexecutive"  />
+
+
+<menuitem name="Leads" id="sales_meet_lead_menu" sequence="3" web_icon="sales_meet,static/description/leads_icon.png" 
+    groups="sales_meet.group_sales_meet_executive,sales_meet.group_sales_meet_saleshead,sales_meet.group_sales_meet_zsm,sales_meet.group_sales_meet_srmanager,sales_meet.group_sales_meet_manager,sales_meet.group_sales_meet_asstmanager,sales_meet.group_sales_meet_srexecutive"/>
+
+<menuitem name="Leads" id="leads_menu" action="crm.crm_lead_all_leads"
+          parent="sales_meet_lead_menu" sequence="2" />
+
+<menuitem name="Opportunity" id="sales_meet_opportunity_menu" sequence="4" web_icon="sales_meet,static/description/opportunity_icon.png"
+    groups="sales_meet.group_sales_meet_saleshead,sales_meet.group_sales_meet_zsm,sales_meet.group_sales_meet_srmanager,sales_meet.group_sales_meet_manager,sales_meet.group_sales_meet_asstmanager,sales_meet.group_sales_meet_srexecutive"/>
+
+
+<menuitem name="Opportunity" id="opportunities_menu" action="crm.crm_lead_opportunities_tree_view"
+          parent="sales_meet_opportunity_menu" sequence="3" />
+
+
+<menuitem name="Reports" id="sales_meet_reports_main_menu" sequence="5" web_icon="sales_meet,static/description/reporting_icon.png" groups="sales_meet.group_sales_meet_saleshead,sales_meet.group_sales_meet_zsm,sales_meet.group_sales_meet_srmanager,sales_meet.group_sales_meet_manager,sales_meet.group_sales_meet_asstmanager,sales_meet.group_sales_meet_srexecutive"/>
+
+<menuitem name="Reports" id="sales_meet_reports_menu" parent="sales_meet_reports_main_menu"
+          sequence="2"/>
+
+<menuitem name="Meetings Detail Report" id="meetings_export_menu" action="action_meetings_details_report"
+          parent="sales_meet_reports_menu" sequence="1" />
+
+<menuitem name="Partner Group" id="menu_partner_group" action="action_partner_group"
+          parent="crm.menu_crm_config_lead" sequence="1"   />
+
+<menuitem name="Grade master" id="menu_grade_master" 
+          parent="hr.menu_hr_root" sequence="4"   />
+
+<menuitem name="Grade" id="menu_grade_master_sub" action="action_grade_master"
+          parent="menu_grade_master" sequence="1"   />
+
+
+<menuitem name="Employee Category" id="menu_hr_employee_category_sub" action="action_hr_employee_category"
+          parent="menu_grade_master" sequence="2"   />
+
+
+<menuitem name="Discuss" id="mail.mail_channel_menu_root_chat" sequence="1" web_icon="sales_meet,static/description/discuss_icon.png" />
+
+<menuitem name="Calendar" id="calendar.mail_menu_calendar" sequence="2" web_icon="sales_meet,static/description/calendar_icon.png" />
+
+<menuitem name="Timesheets" id="hr_timesheet.timesheet_menu_root" web_icon="sales_meet,static/description/timesheet_icon.png" />
+
+<menuitem name="Leaves" id="hr_holidays.menu_hr_holidays_root" web_icon="sales_meet,static/description/leave_icon.png" />
+
+<menuitem name="Expenses" id="hr_expense.menu_hr_expense_root" web_icon="sales_meet,static/description/expense_icon.png" />
+
+<menuitem name="Website" id="website.menu_website" web_icon="sales_meet,static/description/website_icon.png" />
+	
+<menuitem name="Attendance" id="hr_attendance.menu_hr_attendance_root" web_icon="sales_meet,static/description/attendance_icon.png" />
+
+<menuitem name="Employees" id="hr.menu_hr_root" web_icon="sales_meet,static/description/human_resource_icon.png" />
+
+<menuitem name="Payroll" id="hr_payroll.menu_hr_payroll_root" web_icon="sales_meet,static/description/payroll_icon.png" />
+
+<menuitem name="Accounting" id="account.menu_finance" web_icon="sales_meet,static/description/accounts_icon.png" />
+		
+<menuitem name="Purchases" id="purchase.menu_purchase_root" web_icon="sales_meet,static/description/purchase_icon.png" />
+
+<menuitem name="Sales" id="sales_team.menu_base_partner" web_icon="sales_meet,static/description/sales_icon.png" />
+
+<menuitem name="Inventory" id="stock.menu_stock_root" web_icon="sales_meet,static/description/inventory_icon.png" />
+
+<menuitem name="Project" id="project.menu_main_pm" web_icon="sales_meet,static/description/project_icon.png" />
+
+<menuitem name="Settings" id="base.menu_administration" web_icon="sales_meet,static/description/settings_icon.png" />
+
+          
+</odoo>
